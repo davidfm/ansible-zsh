@@ -31,6 +31,12 @@
   become_user: "{{ user }}"
   when: zsh_theme_external == True
 
+- name: "ZSH should run profile.d scripts"
+  blockinfile:
+    path: /etc/zsh/zshenv
+    block: "{{ profile_d_script }}"
+    insertafter: EOF
+
 - name: "Enable zsh for {{ user }}"
   user:
     name: "{{ user }}"

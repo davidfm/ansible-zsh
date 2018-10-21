@@ -3,3 +3,13 @@ zsh_packages:
   - fonts-powerline
 
 oh_my_zsh_repo: 'https://github.com/robbyrussell/oh-my-zsh.git'
+
+profile_d_script: |
+  if [ -d /etc/profile.d ]; then
+  for i in /etc/profile.d/*.sh; do
+  if [ -r $i ]; then
+  . $i
+  fi
+  done
+  unset i
+  fi
