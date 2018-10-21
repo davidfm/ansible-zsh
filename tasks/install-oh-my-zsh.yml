@@ -7,10 +7,14 @@
   set_fact:
     user_home: "{{ grep_result.stdout.split(':')[-2] }}"
 
+- name: "Create oh_my_zsh_home variable"
+  set_fact:
+    oh_my_zsh_home: "{{ user_home }}/.oh-my-zsh"
+
 - name: "Clone oh-my-zsh"
   git:
     repo: "{{ oh_my_zsh_repo }}"
-    dest: "{{ user_home }}/.oh-my-zsh"
+    dest: "{{ oh_my_zsh_home}}"
     depth: 1
   become_user: "{{ user }}"
 
@@ -19,6 +23,13 @@
     src: zshrc.j2
     dest: "{{ user_home }}/.zshrc"
   become_user: "{{ user }}"
+
+- name: "Download external theme: {{ zsh_theme }}"
+  get_url:
+    url: "{{ zsh_theme_url }}"
+    dest: "{{ oh_my_zsh_home }}/custom/themes"
+  become_user: "{{ user }}"
+  when: zsh_theme_external == True
 
 - name: "Enable zsh for {{ user }}"
   user:
