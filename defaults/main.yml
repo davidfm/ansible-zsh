@@ -1,0 +1,11 @@
+zsh_theme: agnosterzak
+zsh_theme_external: true
+zsh_theme_url: 'http://raw.github.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme'
+zsh_plugins:
+  - git
+  - django
+  - aws
+  - docker
+  - pip
+  - python
+  - virtualenvwrapper
