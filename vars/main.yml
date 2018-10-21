@@ -2,4 +2,4 @@ zsh_packages:
   - zsh
   - fonts-powerline
 
-oh_my_zsh_repo: 'https://github.com/robbyrussell/oh-my-zsh.git's
+oh_my_zsh_repo: 'https://github.com/robbyrussell/oh-my-zsh.git'
