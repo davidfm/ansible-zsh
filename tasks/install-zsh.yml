@@ -1,0 +1,6 @@
+---
+- name: "Install ZSH packages"
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ zsh_packages }}"
