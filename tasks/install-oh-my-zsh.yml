@@ -18,6 +18,14 @@
     depth: 1
   become_user: "{{ user }}"
 
+- name: "Set proper ownership/mode to {{ oh_my_zsh_home }}"
+  file:
+    path: "{{ oh_my_zsh_home }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+    recurse: yes
+
 - name: "Add .zshrc"
   template:
     src: zshrc.j2

@@ -60,6 +60,7 @@ plugins=({{ zsh_plugins|join(" ") }})
 # export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+export ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
