@@ -2,6 +2,7 @@
 - name: "Get {{ user }}'s home directory"
   command: "grep {{ user }} /etc/passwd"
   register: grep_result
+  changed_when: False
 
 - name: "Create user_home variable"
   set_fact:
@@ -11,12 +12,18 @@
   set_fact:
     oh_my_zsh_home: "{{ user_home }}/.oh-my-zsh"
 
+- name: "Check if oh-my-zsh is already installed"
+  stat:
+    path: "{{ oh_my_zsh_home }}"
+  register: my_zsh_installed
+
 - name: "Clone oh-my-zsh"
   git:
     repo: "{{ oh_my_zsh_repo }}"
     dest: "{{ oh_my_zsh_home}}"
     depth: 1
   become_user: "{{ user }}"
+  when: my_zsh_installed.stat.exists == False
 
 - name: "Set proper ownership/mode to {{ oh_my_zsh_home }}"
   file:
